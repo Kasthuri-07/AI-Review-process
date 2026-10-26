@@ -1,0 +1,28 @@
+{% extends "base_email.html" %}
+
+{% block content %}
+<span class="badge badge-warning" style="background-color: #fee2e2; color: #b91c1c;">1-Hour Alert</span>
+<h2 style="color: #0f172a; margin-top: 12px; font-size: 18px;">Your Review Starts in 1 Hour</h2>
+<p style="line-height: 1.6; font-size: 14px;">
+    Hello {{ student_name }}, your review session with <strong>{{ reviewer }}</strong> begins at <strong>{{ review_time }} ({{ time_zone }})</strong> today.
+</p>
+
+<div class="info-card">
+    <div class="info-row">
+        <span class="info-label">Task</span>
+        <span class="info-value">{{ task_id }}</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Review Meeting Link</span>
+        <span class="info-value">{{ meeting_link }}</span>
+    </div>
+</div>
+
+<p style="font-size: 14px; color: #475569;">
+    Please test your microphone, have your IDE and demonstration ready, and connect 5 minutes early.
+</p>
+
+<div style="text-align: center; margin: 24px 0;">
+    <a href="{{ meeting_link }}" class="btn" style="background-color: #059669;">Launch Google Meet Now</a>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base_email.html" %}
+
+{% block content %}
+<span class="badge badge-warning">24-Hour Reminder</span>
+<h2 style="color: #0f172a; margin-top: 12px; font-size: 18px;">Reminder: Review #{{ review_number }} is Tomorrow</h2>
+<p style="line-height: 1.6; font-size: 14px;">
+    Hello {{ student_name }}, this is a friendly reminder that your review session for <strong>{{ task_id }}</strong> is scheduled for tomorrow.
+</p>
+
+<div class="info-card">
+    <div class="info-row">
+        <span class="info-label">Date &amp; Time</span>
+        <span class="info-value">{{ review_date }} at {{ review_time }} ({{ time_zone }})</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Mentor</span>
+        <span class="info-value">{{ reviewer }}</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Submission Status</span>
+        {% if submission_status == 'Submitted' %}
+        <span class="info-value" style="color: #16a34a;">{{ submission_status }}</span>
+        {% else %}
+        <span class="info-value" style="color: #dc2626;">{{ submission_status }}</span>
+        {% endif %}
+    </div>
+</div>
+
+{% if submission_status != 'Submitted' %}
+<p style="font-size: 14px; color: #dc2626; font-weight: 600;">
+    Notice: We have not detected your submission yet. Please upload your files or repository link today so our automated AI review engine can process your evaluation prior to the meeting.
+</p>
+{% endif %}
+
+<div style="text-align: center; margin: 28px 0;">
+    <a href="{{ meeting_link }}" class="btn">Meeting / Submission Link</a>
+</div>
+{% endblock %}

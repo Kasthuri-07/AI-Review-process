@@ -1,0 +1,63 @@
+{% extends "base_email.html" %}
+
+{% block content %}
+<span class="badge badge-info">Task Allocation</span>
+<h2 style="color: #0f172a; margin-top: 12px; font-size: 18px;">Welcome to Your Internship, {{ student_name }}!</h2>
+<p style="line-height: 1.6; font-size: 14px;">
+    You have been assigned a new project task for your <strong>{{ internship_role }}</strong> track. Please review the deliverables, evaluation rubric, and deadline below.
+</p>
+
+<div class="info-card">
+    <div class="info-row">
+        <span class="info-label">Student ID</span>
+        <span class="info-value">{{ student_id }}</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Task ID</span>
+        <span class="info-value">{{ task_id }}</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Task Title</span>
+        <span class="info-value">{{ task_title }}</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Assigned Mentor</span>
+        <span class="info-value">{{ mentor_name }} ({{ mentor_email }})</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Allocation Date</span>
+        <span class="info-value">{{ assigned_date }}</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Submission Deadline</span>
+        <span class="info-value" style="color: #dc2626;">{{ deadline }}</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Task Priority</span>
+        <span class="info-value">{{ task_priority }}</span>
+    </div>
+</div>
+
+<h3 style="color: #1e293b; font-size: 15px; margin-top: 24px;">Task Description</h3>
+<p style="line-height: 1.6; font-size: 14px; color: #475569;">
+    {{ task_description }}
+</p>
+
+<h3 style="color: #1e293b; font-size: 15px; margin-top: 24px;">Required Deliverables</h3>
+<div class="rubric-box">
+{{ required_deliverables }}
+</div>
+
+<h3 style="color: #1e293b; font-size: 15px; margin-top: 24px;">Submission Instructions & Classroom Access</h3>
+<p style="font-size: 14px; line-height: 1.6; color: #475569;">
+    All code, documentation, and artifacts must be submitted to the designated Google Classroom portal before the deadline. Late submissions trigger automatic escalation.
+</p>
+
+<div style="text-align: center; margin: 28px 0;">
+    <a href="{{ submission_link }}" class="btn">Access Submission Portal / GCR</a>
+</div>
+
+<p style="font-size: 13px; color: #64748b; margin-top: 20px;">
+    <strong>Next Step:</strong> Your mentor will schedule Review #1 shortly. Keep an eye on your inbox for meeting invites and milestone reminders.
+</p>
+{% endblock %}

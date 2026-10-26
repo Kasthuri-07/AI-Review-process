@@ -1,0 +1,50 @@
+{% extends "base_email.html" %}
+
+{% block content %}
+<span class="badge badge-info">Review Scheduled</span>
+<h2 style="color: #0f172a; margin-top: 12px; font-size: 18px;">Formal Review Session Confirmed</h2>
+<p style="line-height: 1.6; font-size: 14px;">
+    Hello {{ student_name }}, your <strong>Review #{{ review_number }}</strong> has been formally scheduled with mentor <strong>{{ reviewer }}</strong>.
+</p>
+
+<div class="info-card">
+    <div class="info-row">
+        <span class="info-label">Review ID</span>
+        <span class="info-value">{{ review_id }}</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Task</span>
+        <span class="info-value">{{ task_id }} - {{ task_title }}</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Review Date</span>
+        <span class="info-value" style="color: #2563eb;">{{ review_date }}</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Review Time</span>
+        <span class="info-value">{{ review_time }} ({{ time_zone }})</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Submission Status</span>
+        <span class="info-value">{{ submission_status }}</span>
+    </div>
+</div>
+
+<h3 style="color: #1e293b; font-size: 15px; margin-top: 24px;">Required Preparation & Checklist</h3>
+<ul style="font-size: 14px; line-height: 1.6; color: #475569; padding-left: 20px;">
+    <li>Ensure all required deliverables are uploaded to Google Classroom prior to the review call.</li>
+    <li>Prepare a 5-minute walkthrough of your architecture, test results, and implementation decisions.</li>
+    <li>Our AI Evaluation Assistant will conduct an automated preliminary code/deliverable audit prior to the mentor session.</li>
+</ul>
+
+{% if previous_feedback %}
+<h3 style="color: #1e293b; font-size: 15px; margin-top: 24px;">Previous Review Notes</h3>
+<div class="rubric-box">
+{{ previous_feedback }}
+</div>
+{% endif %}
+
+<div style="text-align: center; margin: 28px 0;">
+    <a href="{{ meeting_link }}" class="btn">Join Review Meeting / GCR</a>
+</div>
+{% endblock %}

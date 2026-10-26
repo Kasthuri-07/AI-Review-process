@@ -1,0 +1,96 @@
+{% extends "base_email.html" %}
+
+{% block content %}
+{% if score >= passing_score %}
+<span class="badge badge-success">Review #{{ review_number }} Feedback Report</span>
+{% else %}
+<span class="badge badge-warning">Review #{{ review_number }} Feedback Report</span>
+{% endif %}
+
+<h2 style="color: #0f172a; margin-top: 12px; font-size: 18px;">
+    Official Review Feedback: {{ task_id }}
+</h2>
+<p style="line-height: 1.6; font-size: 14px;">
+    Hello {{ student_name }}, your submission for <strong>{{ task_title }}</strong> has been evaluated by our AI Assessment Engine and verified by mentor <strong>{{ reviewer }}</strong>.
+</p>
+
+<!-- Score Banner -->
+<div style="background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 8px; padding: 20px; text-align: center; color: #ffffff; margin: 20px 0;">
+    <div style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8;">Evaluation Score</div>
+    {% if score >= passing_score %}
+    <div style="font-size: 40px; font-weight: 800; color: #4ade80; margin: 4px 0;">
+        {{ score }} <span style="font-size: 20px; color: #94a3b8; font-weight: 400;">/ 100</span>
+    </div>
+    <div style="font-size: 14px; font-weight: 600;">
+        Status: Approved / Criteria Satisfied
+    </div>
+    {% else %}
+    <div style="font-size: 40px; font-weight: 800; color: #f87171; margin: 4px 0;">
+        {{ score }} <span style="font-size: 20px; color: #94a3b8; font-weight: 400;">/ 100</span>
+    </div>
+    <div style="font-size: 14px; font-weight: 600;">
+        Status: Corrections Required for Re-Review
+    </div>
+    {% endif %}
+</div>
+
+<h3 style="color: #1e293b; font-size: 15px; margin-top: 24px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">
+    1. Task Completion Summary
+</h3>
+<p style="font-size: 14px; line-height: 1.6; color: #334155;">
+    {{ submission_summary }}
+</p>
+
+<h3 style="color: #166534; font-size: 15px; margin-top: 20px; border-bottom: 2px solid #bbf7d0; padding-bottom: 6px;">
+    2. What Was Done Correctly (Strengths)
+</h3>
+<div style="background-color: #f0fdf4; border-left: 4px solid #16a34a; padding: 12px 16px; border-radius: 4px; font-size: 13px; color: #166534; line-height: 1.6;">
+    {{ strengths }}
+</div>
+
+<h3 style="color: #991b1b; font-size: 15px; margin-top: 20px; border-bottom: 2px solid #fecaca; padding-bottom: 6px;">
+    3. Mistakes Identified &amp; Technical Issues
+</h3>
+<div style="background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 12px 16px; border-radius: 4px; font-size: 13px; color: #991b1b; line-height: 1.6;">
+    {{ identified_mistakes }}
+</div>
+
+<h3 style="color: #92400e; font-size: 15px; margin-top: 20px; border-bottom: 2px solid #fde68a; padding-bottom: 6px;">
+    4. Missing Requirements
+</h3>
+<div style="background-color: #fffbeb; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 4px; font-size: 13px; color: #92400e; line-height: 1.6;">
+    {{ missing_requirements }}
+</div>
+
+<h3 style="color: #1e293b; font-size: 15px; margin-top: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">
+    5. Recommended Corrections &amp; Guidance
+</h3>
+<div class="rubric-box">
+{{ improvement_suggestions }}
+</div>
+
+<h3 style="color: #1e293b; font-size: 15px; margin-top: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">
+    6. Action Items Before Next Review
+</h3>
+<p style="font-size: 14px; line-height: 1.6; color: #334155;">
+    {{ next_actions }}
+</p>
+
+{% if next_review_date %}
+<div class="info-card" style="border: 2px solid #3b82f6; background-color: #eff6ff;">
+    <div style="font-weight: 700; color: #1d4ed8; font-size: 14px; margin-bottom: 6px;">Next Review Session Scheduled:</div>
+    <div class="info-row">
+        <span class="info-label">Date &amp; Time</span>
+        <span class="info-value">{{ next_review_date }} at {{ next_review_time }} ({{ time_zone }})</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Review Meeting Link</span>
+        <span class="info-value">{{ meeting_link }}</span>
+    </div>
+</div>
+{% endif %}
+
+<div style="text-align: center; margin: 28px 0;">
+    <a href="{{ submission_link }}" class="btn">View Detailed Audit &amp; Resubmit</a>
+</div>
+{% endblock %}
